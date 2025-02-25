@@ -1,0 +1,49 @@
+apply plugin: 'java'
+apply plugin: 'maven-publish'
+
+group = 'com.github.strubium'
+version = '1.0'
+
+sourceCompatibility = 1.8 // java 8
+targetCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    maven { url 'https://jitpack.io' }
+
+}
+
+dependencies {
+    // Core ImGui
+    implementation 'io.github.spair:imgui-java-binding:1.86.11'
+    implementation 'io.github.spair:imgui-java-lwjgl3:1.86.11'
+    implementation 'io.github.spair:imgui-java-app:1.86.11' // Add ImGui App module
+
+    runtimeOnly 'org.lwjgl:lwjgl:3.3.2:natives-windows' // Change to 'natives-linux' or 'natives-macos' as needed
+    runtimeOnly 'org.lwjgl:lwjgl-opengl:3.3.2:natives-windows'
+    runtimeOnly 'org.lwjgl:lwjgl-glfw:3.3.2:natives-windows'
+    runtimeOnly 'io.github.spair:imgui-java-natives-windows:1.89.0' // Change to 'natives-linux' or 'natives-macos' if needed
+
+    // LWJGL
+    implementation 'org.lwjgl:lwjgl:3.3.2'
+    implementation 'org.lwjgl:lwjgl-opengl:3.3.2'
+    implementation 'org.lwjgl:lwjgl-glfw:3.3.2'
+}
+
+java {
+    withSourcesJar()
+    withJavadocJar()
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from components.java
+        }
+    }
+}
+
+wrapper {
+    gradleVersion = "8.8"
+    distributionType = Wrapper.DistributionType.ALL
+}
