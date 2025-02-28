@@ -38,7 +38,7 @@ public class ImguiHandler {
         ImGuiImplGlfw imguiGlfw = new ImGuiImplGlfw();
         imguiGlfw.init(windowManager.window, true);
         imguiGl3 = new ImGuiImplGl3();
-        imguiGl3.init(); // OpenGL version
+        imguiGl3.init(glslVersion); // OpenGL version
     }
 
     /**
