@@ -2,7 +2,7 @@ apply plugin: 'java'
 apply plugin: 'maven-publish'
 
 group = 'com.github.strubium'
-version = '1.0'
+version = '1.0.2'
 
 sourceCompatibility = 1.8 // java 8
 targetCompatibility = 1.8
@@ -22,12 +22,14 @@ dependencies {
     runtimeOnly 'org.lwjgl:lwjgl:3.3.2:natives-windows' // Change to 'natives-linux' or 'natives-macos' as needed
     runtimeOnly 'org.lwjgl:lwjgl-opengl:3.3.2:natives-windows'
     runtimeOnly 'org.lwjgl:lwjgl-glfw:3.3.2:natives-windows'
+    runtimeOnly 'org.lwjgl:lwjgl-stb:3.3.2:natives-windows'
     runtimeOnly 'io.github.spair:imgui-java-natives-windows:1.89.0' // Change to 'natives-linux' or 'natives-macos' if needed
 
     // LWJGL
     implementation 'org.lwjgl:lwjgl:3.3.2'
     implementation 'org.lwjgl:lwjgl-opengl:3.3.2'
     implementation 'org.lwjgl:lwjgl-glfw:3.3.2'
+    implementation 'org.lwjgl:lwjgl-stb:3.3.2'
 }
 
 java {

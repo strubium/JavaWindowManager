@@ -1,10 +1,13 @@
 package com.github.strubium.windowmanager.window;
 
 import org.lwjgl.glfw.GLFWErrorCallback;
+import org.lwjgl.glfw.GLFWImage;
 import org.lwjgl.glfw.GLFWVidMode;
+import org.lwjgl.stb.STBImage;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.system.MemoryStack;
 
+import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 
 import static org.lwjgl.glfw.Callbacks.glfwFreeCallbacks;
@@ -20,7 +23,8 @@ import static org.lwjgl.system.MemoryUtil.NULL;
  */
 public class WindowManager {
 
-    public long window;  // Window handle
+    /**The window handle*/
+    public long window;  //
     private boolean fullscreen;
     private final int windowWidth;
     private final int windowHeight;
@@ -184,6 +188,34 @@ public class WindowManager {
      */
     public void setWindowTitle(String newTitle) {
         glfwSetWindowTitle(window, newTitle);
+    }
+
+    /**
+     * Set the window icon
+     *
+     * @param imagePath The path to the icon image (must be PNG or similar)
+     */
+    public void setWindowIcon(String imagePath) {
+        try (MemoryStack stack = stackPush()) {
+            IntBuffer width = stack.mallocInt(1);
+            IntBuffer height = stack.mallocInt(1);
+            IntBuffer channels = stack.mallocInt(1);
+
+            ByteBuffer image = STBImage.stbi_load(imagePath, width, height, channels, 4);
+            if (image == null) {
+                throw new RuntimeException("Failed to load icon image: " + STBImage.stbi_failure_reason());
+            }
+
+            GLFWImage.Buffer iconBuffer = GLFWImage.malloc(1, stack);
+            iconBuffer.position(0);
+            iconBuffer.width(width.get(0));
+            iconBuffer.height(height.get(0));
+            iconBuffer.pixels(image);
+
+            glfwSetWindowIcon(window, iconBuffer);
+
+            STBImage.stbi_image_free(image);
+        }
     }
 
 }

@@ -147,6 +147,14 @@ public class GuiBuilder {
         return this;
     }
 
+
+    /**
+     * Add a button to the GUI
+     *
+     * @param label  The label for this button.
+     * @param onClick What to do when this button is clicked.
+     * @return The current GuiBuilder instance.
+     */
     public GuiBuilder addButton(String label, Runnable onClick) {
         if (ImGui.button(label)) {
             onClick.run();
@@ -154,6 +162,12 @@ public class GuiBuilder {
         return this;
     }
 
+    /**
+     * Add some text to the GUI
+     *
+     * @param text  The text to add.
+     * @return The current GuiBuilder instance.
+     */
     public GuiBuilder addText(String text) {
         ImGui.text(text);
         return this;
