@@ -4,7 +4,7 @@ plugins {
 }
 
 group = 'com.github.strubium'
-version = '1.0.4'
+version = '1.0.5'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -14,17 +14,17 @@ repositories {
     maven { url 'https://jitpack.io' }
 }
 
-def lwjglVersion = '3.3.2'
-def imguiVersion = '1.89.0'
+def lwjglVersion = '3.3.6'
+def imguiVersion = '1.86.11'
 
 def baseDependencies = [
         "org.lwjgl:lwjgl:$lwjglVersion",
         "org.lwjgl:lwjgl-opengl:$lwjglVersion",
         "org.lwjgl:lwjgl-glfw:$lwjglVersion",
         "org.lwjgl:lwjgl-stb:$lwjglVersion",
-        "io.github.spair:imgui-java-binding:1.86.11",
-        "io.github.spair:imgui-java-lwjgl3:1.86.11",
-        "io.github.spair:imgui-java-app:1.86.11",
+        "io.github.spair:imgui-java-binding:$imguiVersion",
+        "io.github.spair:imgui-java-lwjgl3:$imguiVersion",
+        "io.github.spair:imgui-java-app:$imguiVersion",
         "org.jsoup:jsoup:1.17.2"
 ]
 
