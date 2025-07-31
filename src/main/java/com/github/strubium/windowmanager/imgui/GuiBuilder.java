@@ -147,6 +147,13 @@ public class GuiBuilder {
         return this;
     }
 
+    /**
+     * Adds a button to the GUI with the specified label and click handler.
+     *
+     * @param label The text label of the button.
+     * @param onClick The action to perform when the button is clicked.
+     * @return The current instance of the GuiBuilder
+     */
     public GuiBuilder addButton(String label, Runnable onClick) {
         if (ImGui.button(label)) {
             onClick.run();
@@ -154,16 +161,39 @@ public class GuiBuilder {
         return this;
     }
 
+    /**
+     * Adds static text to the GUI.
+     *
+     * @param text The text to be displayed in the GUI.
+     * @return The current instance of the GuiBuilder  
+     */
     public GuiBuilder addText(String text) {
         ImGui.text(text);
         return this;
     }
 
+    /**
+     * Adds a checkbox to the GUI with the specified label and associated value.
+     *
+     * @param label The label of the checkbox.
+     * @param value The boolean value that determines whether the checkbox is checked or not.
+     * @return The current instance of the GuiBuilder  
+     */
     public GuiBuilder addCheckbox(String label, ImBoolean value) {
         ImGui.checkbox(label, value);
         return this;
     }
 
+    /**
+     * Adds a combo box (drop-down list) to the GUI with the specified label,
+     * selected index, and options.
+     *
+     * @param label The label for the combo box.
+     * @param selectedIndex The index of the currently selected option.
+     * @param options The list of options to be displayed in the combo box.
+     * @return The current instance of the GuiBuilder  
+     * @throws IllegalArgumentException If the options list is null or empty.
+     */
     public GuiBuilder addComboBox(String label, ImInt selectedIndex, List<String> options) {
         if (options == null || options.isEmpty()) {
             throw new IllegalArgumentException("Options for combo box cannot be null or empty.");
@@ -194,7 +224,14 @@ public class GuiBuilder {
         return this;
     }
 
-    // New Method: addFloatInput for float values
+    /**
+     * Adds a float input field to the GUI.
+     *
+     * @param label The label of the input field.
+     * @param value The value bound to the input field (it will be updated when the user enters a new value).
+     * @param maxWidth The maximum width of the input field.
+     * @return The current instance of the GuiBuilder  
+     */
     public GuiBuilder addFloatInput(String label, ImFloat value, float maxWidth) {
         float screenWidth = ImGui.getIO().getDisplaySizeX();
         ImGui.setCursorPos((screenWidth - maxWidth) / 2, ImGui.getCursorPosY());
@@ -206,6 +243,13 @@ public class GuiBuilder {
         return this;
     }
 
+    /**
+     * Adds text to the GUI, centered horizontally at the specified vertical offset.
+     *
+     * @param text The text to be displayed.
+     * @param yOffset The vertical offset for positioning the text.
+     * @return The current instance of the GuiBuilder  
+     */
     public GuiBuilder addTextCentered(String text, float yOffset) {
         float screenWidth = ImGui.getIO().getDisplaySizeX();
         float textWidth = ImGui.calcTextSize(text).x;
@@ -214,6 +258,18 @@ public class GuiBuilder {
         return this;
     }
 
+
+    /**
+     * Adds a centered button to the GUI with the specified label, click handler,
+     * vertical offset, and padding.
+     *
+     * @param label The label of the button.
+     * @param onClick The action to perform when the button is clicked.
+     * @param yOffset The vertical offset for the button's position.
+     * @param paddingWidth The horizontal padding added to the button's width.
+     * @param paddingHeight The vertical padding added to the button's height.
+     * @return The current instance of the GuiBuilder  
+     */
     public GuiBuilder addButtonCentered(String label, Runnable onClick, float yOffset, float paddingWidth, float paddingHeight) {
         float screenWidth = ImGui.getIO().getDisplaySizeX();
         float textWidth = ImGui.calcTextSize(label).x;
@@ -226,7 +282,14 @@ public class GuiBuilder {
         return this;
     }
 
-
+    /**
+     * Adds text to the GUI at a specific position defined by the x and y coordinates.
+     *
+     * @param text The text to be displayed.
+     * @param x The x-coordinate for the position.
+     * @param y The y-coordinate for the position.
+     * @return The current instance of the GuiBuilder  
+     */
     public GuiBuilder addTextAtPosition(String text, float x, float y) {
         ImGui.setCursorPos(x, y);
         ImGui.text(text);
