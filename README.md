@@ -9,10 +9,10 @@ Add [Jitpack](https://www.jitpack.io/#strubium/JavaWindowManager) to your build.
     maven { url 'https://jitpack.io' }
 ```
 
-Add JavaWindowManager to your dependencies block
+Add JavaWindowManager to your dependencies block supports `windows`, `linux` and `macos`
 
 ```
-    implementation 'com.github.strubium:JavaWindowManager:1.0.0'
+    implementation 'com.github.strubium:JavaWindowManager:1.0.5:windows'
 ```
 
 ## Usage
@@ -28,7 +28,7 @@ Manages ImGui initialization, input polling, frame lifecycle, rendering, and cle
 Provides an abstraction layer to build ImGui widgets (buttons, sliders, checkboxes, combos).
 
 #### HtmlToImGui
-Parses HTML markup using Jsoup and converts elements into ImGui widgets via GuiBuilder. Supports action registration callbacks for user interaction.
+Parses HTML markup using [Jsoup](https://jsoup.org/) and converts elements into ImGui widgets via GuiBuilder. Supports action registration callbacks for user interaction.
 
 ### Usage Example 
 Go look at `GuiHtmlTestApp` for a usage example as to how everything comes together
