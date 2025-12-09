@@ -80,9 +80,12 @@ def createPlatformJarTask(String platform, Configuration nativeConfig) {
         description = "Assembles a jar including $platform native dependencies"
         archiveClassifier.set(platform)
 
+        duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
         from sourceSets.main.output
 
         dependsOn configurations.runtimeClasspath
+
         from {
             nativeConfig.collect { zipTree(it) }
         }
