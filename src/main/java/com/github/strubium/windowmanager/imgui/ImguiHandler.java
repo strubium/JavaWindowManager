@@ -16,6 +16,7 @@ import static org.lwjgl.glfw.GLFW.glfwGetWindowSize;
  */
 public class ImguiHandler {
     private ImGuiImplGl3 imguiGl3;
+    private ImGuiImplGlfw imguiGlfw;
     private final WindowManager windowManager;
 
 
@@ -35,7 +36,7 @@ public class ImguiHandler {
      */
     public void initialize(String glslVersion) {
         ImGui.createContext();
-        ImGuiImplGlfw imguiGlfw = new ImGuiImplGlfw();
+        imguiGlfw = new ImGuiImplGlfw();
         imguiGlfw.init(windowManager.window, true);
         imguiGl3 = new ImGuiImplGl3();
         imguiGl3.init(glslVersion); // OpenGL version
@@ -45,6 +46,8 @@ public class ImguiHandler {
      * Starts a new ImGui frame.
      */
     public void newFrame() {
+        imguiGlfw.newFrame();
+
         // Get the current window size dynamically
         int[] width = new int[1];
         int[] height = new int[1];
@@ -96,6 +99,8 @@ public class ImguiHandler {
      * Cleans up ImGui resources.
      */
     public void cleanup() {
+        imguiGlfw.dispose();
+        imguiGl3.dispose();
         ImGui.destroyContext();
     }
 }
