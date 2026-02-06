@@ -11,6 +11,11 @@ import org.jsoup.nodes.Element;
 import java.util.*;
 import java.util.function.Consumer;
 
+/**
+ * Utility class to allow you to use HTML files to make ImGui GUIs
+ *
+ * @author strubium
+ */
 public class HtmlToImGui {
 
     // Persistent state
@@ -24,30 +29,63 @@ public class HtmlToImGui {
     private static final Map<String, Consumer<Float>> sliderActions = new HashMap<>();
     private static final Map<String, Consumer<Integer>> comboBoxActions = new HashMap<>();
 
+    /**
+     * Render your HTML -> ImGui UI
+     *
+     * @param guiBuilder The {@link GuiBuilder} class to use to make the window
+     * @param html The HTML file as a string
+     */
     public static void renderHtml(GuiBuilder guiBuilder, String html) {
         Document doc = Jsoup.parse(html);
         Element body = doc.body();
         parseElement(guiBuilder, body, "");
     }
 
-    // Register actions for all control types:
+    /**
+     * Register an action for a button
+     *
+     * @param id The ID to use for this button, use {@link #printControlIds(String)} to all ids
+     * @param action The action to run when the button is clicked
+     */
     public static void registerButtonAction(String id, Runnable action) {
         buttonActions.put(id, action);
     }
 
+    /**
+     * Register an action for a checkbox
+     *
+     * @param id The ID to use for this button, use {@link #printControlIds(String)} to all ids
+     * @param action The action to run when the checkbox is toggled
+     */
     public static void registerCheckboxAction(String id, Consumer<Boolean> action) {
         checkboxActions.put(id, action);
     }
 
+    /**
+     * Register an action for a slider
+     *
+     * @param id The ID to use for this button, use {@link #printControlIds(String)} to all ids
+     * @param action The action to run when the slider is slid
+     */
     public static void registerSliderAction(String id, Consumer<Float> action) {
         sliderActions.put(id, action);
     }
 
+    /**
+     * Register an action for a combo box (drop-down list)
+     *
+     * @param id The ID to use for this button, use {@link #printControlIds(String)} to all ids
+     * @param action The action to run when the combo box is changed
+     */
     public static void registerComboBoxAction(String id, Consumer<Integer> action) {
         comboBoxActions.put(id, action);
     }
 
-    // Print control IDs (unchanged)
+    /**
+     * Print control IDs
+     *
+     * @param html The HTML file as a string
+     */
     public static void printControlIds(String html) {
         Document doc = Jsoup.parse(html);
         Element body = doc.body();

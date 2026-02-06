@@ -70,7 +70,9 @@ public class WindowManager {
             throw new RuntimeException("Failed to create the GLFW window");
         }
 
-        centerWindow();
+        if(glfwGetPlatform() != GLFW_PLATFORM_WAYLAND){
+            centerWindow(); //Wayland does not support centering the window
+        }
 
         glfwMakeContextCurrent(window);
         glfwSwapInterval(vSync ? 1 : 0); // Enable v-sync
