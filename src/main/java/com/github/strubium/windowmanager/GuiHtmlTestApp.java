@@ -30,8 +30,10 @@ public class GuiHtmlTestApp {
                     "<option>Third</option>" +
                     "</select>";
 
+    public static HtmlToImGui htmlToImGui = new HtmlToImGui(html);
+
     public static void main(String[] args) {
-        HtmlToImGui.printControlIds(html);
+        htmlToImGui.printControlIds();
         windowManager.createWindow("HTML to ImGui Test", true);
         windowManager.setupDefaultKeys();
 
@@ -40,10 +42,10 @@ public class GuiHtmlTestApp {
         GuiBuilder guiBuilder = new GuiBuilder();
 
         // Register actions once outside the loop
-        HtmlToImGui.registerButtonAction("/button[2]", () -> System.out.println("Button was clicked!"));
-        HtmlToImGui.registerCheckboxAction("/input[3]", checked -> System.out.println("Checkbox changed: " + checked));
-        HtmlToImGui.registerSliderAction("/input[4]", value -> System.out.println("Slider changed: " + value));
-        HtmlToImGui.registerComboBoxAction("/select[5]", selectedIndex -> System.out.println("Dropdown changed: " + selectedIndex));
+        htmlToImGui.registerButtonAction("/button[2]", () -> System.out.println("Button was clicked!"));
+        htmlToImGui.registerCheckboxAction("/input[3]", checked -> System.out.println("Checkbox changed: " + checked));
+        htmlToImGui.registerSliderAction("/input[4]", value -> System.out.println("Slider changed: " + value));
+        htmlToImGui.registerComboBoxAction("/select[5]", selectedIndex -> System.out.println("Dropdown changed: " + selectedIndex));
 
         // Main loop
         while (!windowManager.shouldClose()) {
@@ -55,7 +57,7 @@ public class GuiHtmlTestApp {
             guiBuilder.beginWindow("Test Window");
 
             // Render your HTML -> ImGui UI
-            HtmlToImGui.renderHtml(guiBuilder, html);
+            htmlToImGui.renderHtml(guiBuilder);
 
             guiBuilder.endWindow();
 
